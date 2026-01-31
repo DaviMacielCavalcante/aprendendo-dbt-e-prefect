@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: dim_artist
+    description: "Dimensão contendo artistas únicos do Top 100 Spotify 2025"
+    columns:
+      - name: artist_id
+        tests:
+          - unique
+          - not_null
+      - name: artist_name
+        tests:
+          - unique
+          - not_null
+  - name: dim_genre
+    description: "Dimensão contendo gêneros musicais únicos do Top 100 Spotify 2025"
+    columns:
+      - name: genre_id
+        tests:
+          - unique
+          - not_null
+      - name: genre_name
+        tests:
+          - unique
+          - not_null
+  - name: fact_song_ranking
+    description: "Tabela fato contendo as métricas de cada música no ranking Top 100 Spotify 2025"
+    columns:
+      - name: rank
+        tests: 
+          - not_null
+          - unique
+      - name: song_title
+        tests:
+          - not_null
+      - name: artist_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_artist')
+                field: artist_id
+      - name: genre_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_artist')
+                field: artist_id
+      - name: release_date
+        tests:
+          - not_null
+      - name: spotify_streams_millions
+        tests:
+          - not_null
+      - name: popularity_score
+        tests:
+          - not_null
+      - name: duration_seconds
+        tests:
+          - not_null
+      - name: explicit
+        tests:
+          - not_null
