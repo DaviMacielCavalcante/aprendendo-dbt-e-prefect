@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_songs
+    columns:
+      - name: rank
+        tests: 
+          - not_null
+          - unique
+      - name: song_title
+        tests:
+          - not_null
+      - name: artist
+        tests:
+          - not_null
+      - name: genre
+        tests:
+          - not_null
+      - name: release_date
+        tests:
+          - not_null
+      - name: spotify_streams_millions
+        tests:
+          - not_null
+      - name: popularity_score
+        tests:
+          - not_null
+      - name: duration_seconds
+        tests:
+          - not_null
+      - name: explicit
+        tests:
+          - not_null
